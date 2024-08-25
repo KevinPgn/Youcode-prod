@@ -12,7 +12,7 @@ export const Account = ({user}: {user: any}) => {
     </div>
     <div className="flex mt-5 flex-col gap-2 mb-5">
         <Link href="/account/settings" className="text-white text-center w-full p-2 border border-[#312b28] hover:bg-[#25211f] hover:border-[#645a55] duration-300 rounded-md text-sm">Settings</Link>
-        <Link href="/account/admin" className="text-white text-center w-full p-2 border border-[#312b28] hover:bg-[#25211f] hover:border-[#645a55] duration-300 rounded-md text-sm">Admin</Link>
+        <Link href="/admin" className="text-white text-center w-full p-2 border border-[#312b28] hover:bg-[#25211f] hover:border-[#645a55] duration-300 rounded-md text-sm">Admin</Link>
     </div>
 
     <div className="flex justify-end">
