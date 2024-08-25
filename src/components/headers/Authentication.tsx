@@ -13,7 +13,7 @@ export const Authentication = () => {
     {session ? (
         <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center border px-3 p-1 border-gray-800 cursor-pointer rounded-md gap-2">
-            <img src={session.user?.image as string} alt="user image" className="w-5 h-5 rounded-full" />
+            <img src={session.user?.image as string} alt="user image" className="w-5 h-5 rounded-full object-cover" />
             <p className="text-xs">{session.user?.name}</p>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-black border border-gray-800 text-white">

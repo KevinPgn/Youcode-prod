@@ -4,7 +4,7 @@ import { LogOut } from "lucide-react"
 export const Account = ({user}: {user: any}) => {
   return <div className="w-full p-5 border border-[#25211f] rounded-xl bg-[#1C1917]">
     <div className="flex items-center gap-5">
-        <img src={user.image} alt="user image" className="w-10 h-10 rounded-full" />
+        <img src={user.image} alt="user image" className="w-10 h-10 rounded-full object-cover" />
         <div className="flex flex-col gap-1">
             <p className="text-white text-md">{user.email}</p>
             <p className="text-gray-400 text-sm">{user.name}</p>
