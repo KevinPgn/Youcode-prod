@@ -17,6 +17,7 @@ model User {
   sessions      Session[]
   courses       Course[]
   userProgress UserChapterProgress[]
+  enrollments Enrollment[]
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -74,6 +75,7 @@ model Course {
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   chapters Chapter[]
+  enrollments Enrollment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -108,4 +110,19 @@ model UserChapterProgress {
   updatedAt DateTime @updatedAt
   
   @@unique([authorId, chapterId])
+}
+
+model Enrollment {
+  id String @id @default(cuid())
+  
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([userId, courseId])
 }
