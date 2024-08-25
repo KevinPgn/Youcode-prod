@@ -4,10 +4,11 @@ import { LogIn } from "lucide-react"
 import { Button } from "../ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import {User, LogOut} from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export const Authentication = () => {
   const {data: session} = useSession()
-
+  const router = useRouter()
   return <>
     {session ? (
         <DropdownMenu>
@@ -16,7 +17,7 @@ export const Authentication = () => {
             <p className="text-xs">{session.user?.name}</p>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-black border border-gray-800 text-white">
-          <DropdownMenuItem className="flex items-center gap-2"><User className="w-4 h-4"/>Account</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push("/account")} className="flex items-center gap-2"><User className="w-4 h-4"/>Account</DropdownMenuItem>
           <DropdownMenuSeparator className="bg-gray-800"/>
           <DropdownMenuItem onClick={() => signOut()} className="flex items-center gap-2"><LogOut className="w-4 h-4"/>Logout</DropdownMenuItem>
         </DropdownMenuContent>
