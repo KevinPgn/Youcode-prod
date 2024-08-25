@@ -1,4 +1,4 @@
-import AvatarCircles from "@/components/magicui/avatar-circles"
+import AvatarCircles from "@/components/homePage/magicui/avatar-circles"
 import Image from "next/image"
 
 const avatarUrls = [

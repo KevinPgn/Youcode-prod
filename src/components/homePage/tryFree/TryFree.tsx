@@ -1,4 +1,4 @@
-import { Button } from "../ui/button"
+import { Button } from "../../ui/button"
 
 export const TryFree = () => {
   return <section className="max-w-[1200px] mx-auto px-4 py-20 mb-5">
