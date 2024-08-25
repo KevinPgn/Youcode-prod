@@ -10,7 +10,7 @@ export const AdminStats = () => {
             <h1 className='text-white text-2xl border-b pb-2 border-gray-800 font-semibold'>Courses</h1>
             <BtnCourses />
         </div>
-      <div className="bg-[#1C1917] rounded-lg p-4">
+      <div className="bg-[#1C1917] border border-gray-800 rounded-lg p-5">
         <h2 className="text-white text-sm font-semibold mb-4">Quick stats</h2>
         <ul className="space-y-2 text-gray-300">
           <li className="flex text-sm text-gray-400 items-center">
