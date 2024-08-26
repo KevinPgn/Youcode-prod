@@ -12,7 +12,7 @@ export const AllChaptersForThisCourse = ({chapters, courseId, courseName}: {chap
         {AllChapters.length === 0 ? (
           <>
             <p className="text-center text-gray-400">No chapters available for this course. Start by creating a chapter.</p>
-            <BtnCreateChapter />
+            <BtnCreateChapter courseId={courseId} />
           </>
         ) : (
           AllChapters.map((chapter: any) => (
