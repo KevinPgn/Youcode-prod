@@ -172,3 +172,18 @@ export const updateCourse = authenticatedAction
         redirect(`/admin/courses/${course.id}`);
     });
 
+export const getChaptersOfTheCourse = authenticatedAction
+    .schema(z.object({
+        courseId: z.string(),
+    }))
+    .action(async ({parsedInput: {courseId}, ctx: {userId}}) => {
+        const chapters = await prisma.chapter.findMany({
+            where: {
+                courseId,
+                course: {
+                    authorId: userId,
+                },
+            },
+        });
+        return chapters;
+    });
