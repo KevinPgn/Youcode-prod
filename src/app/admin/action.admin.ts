@@ -209,3 +209,21 @@ export const getCourseName = authenticatedAction
         });
         return course
     });
+
+export const createChapter = authenticatedAction
+    .schema(z.object({
+        courseId: z.string(),
+        title: z.string().min(3).max(100).optional(),
+        content: z.string().min(10).max(500).optional(),
+    }))
+    .action(async ({parsedInput: {courseId, title, content}, ctx: {userId}}) => {
+        const newChapter = await prisma.chapter.create({
+            data: {
+                title: title || "Draft Lesson",
+                content: content || "Default Content",
+                courseId,
+            },
+        });
+        revalidatePath(`/admin/courses/${courseId}`);
+        redirect(`/admin/courses/${courseId}/chapters/${newChapter.id}`);
+    });

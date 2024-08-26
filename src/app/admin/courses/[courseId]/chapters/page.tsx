@@ -12,7 +12,7 @@ const ChaptersOfTheCoursePage = async ({params}: {params: {courseId: string}}) =
   return (
     <Auth>
       <EnTeteAdminCourseIdChapters params={params} />
-      <AllChaptersForThisCourse chapters={chapters} courseName={courseName?.data?.name} />
+      <AllChaptersForThisCourse chapters={chapters} courseId={params.courseId} courseName={courseName?.data?.name} />
     </Auth>
   )
 }

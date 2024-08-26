@@ -1,4 +1,6 @@
-export const AllChaptersForThisCourse = ({chapters, courseName}: {chapters: any, courseName: any}) => {
+import { BtnCreateChapter } from "./BtnCreateChapter"
+
+export const AllChaptersForThisCourse = ({chapters, courseId, courseName}: {chapters: any, courseId: string, courseName: any}) => {
   const AllChapters = chapters.data
 
   return <div className="max-w-[800px] h-[600px] mx-auto mt-3">
@@ -8,7 +10,10 @@ export const AllChaptersForThisCourse = ({chapters, courseName}: {chapters: any,
       <div className="flex flex-col gap-5">
         <h2 className="text-sm font-semibold text-gray-400">Chapters</h2>
         {AllChapters.length === 0 ? (
-          <p className="text-center text-gray-400">No chapters available for this course. Start by creating a chapter.</p>
+          <>
+            <p className="text-center text-gray-400">No chapters available for this course. Start by creating a chapter.</p>
+            <BtnCreateChapter />
+          </>
         ) : (
           AllChapters.map((chapter: any) => (
             <div key={chapter.id}>
