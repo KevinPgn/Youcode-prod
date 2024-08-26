@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export const CourseDetail = ({course}: {course: any}) => {
     const courseData = course.data
     return (
@@ -28,11 +30,11 @@ export const CourseDetail = ({course}: {course: any}) => {
             </div>
           </div>
           <div className="w-full lg:w-fit bg-[#1C1917] border border-gray-800 p-5 rounded-lg">
-            <div className="flex items-center mb-4">
+            <div className="flex items-center flex-col mb-4">
               <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center mr-2">
                 {courseData.name.charAt(0).toUpperCase()}
               </div>
-              <h3 className="text-md text-white font-semibold">{courseData.name}</h3>
+              <h3 className="text-md text-white mt-2 font-semibold">{courseData.name}</h3>
             </div>
             <div className="bg-pink-600 uppercase text-white text-xs font-bold px-2 py-1 rounded w-fit mb-2">
                 {courseData.state}
@@ -40,8 +42,8 @@ export const CourseDetail = ({course}: {course: any}) => {
             <p className="text-sm text-white mb-1">{courseData._count.enrollments} users</p>
             <p className="text-sm text-white mb-4">{courseData._count.chapters} lessons</p>
             <div className="flex flex-col gap-2">
-              <button className="bg-gray-800 text-white px-3 py-1 rounded text-sm w-full">Edit</button>
-              <button className="bg-gray-800 text-white px-3 py-1 rounded text-sm w-full">Edit lessons</button>
+              <Link href={`/admin/courses/${courseData.id}/edit`} className="text-white text-center w-full p-2 border border-[#312b28] hover:bg-[#25211f] hover:border-[#645a55] duration-300 rounded-md text-sm">Edit</Link>
+              <Link href={`/admin/courses/${courseData.id}/chapters`} className="text-white text-center w-full p-2 border border-[#312b28] hover:bg-[#25211f] hover:border-[#645a55] duration-300 rounded-md text-sm">Edit lessons</Link>
             </div>
           </div>
         </div>
