@@ -146,3 +146,29 @@ export const getCourseById = authenticatedAction
         });
         return course;
     });
+
+export const updateCourse = authenticatedAction
+    .schema(z.object({
+        courseId: z.string(),
+        name: z.string().min(3).max(100).optional(),
+        description: z.string().min(10).max(500).optional(),
+        image: z.string().optional(),
+        state: z.enum(["draft", "published"]).optional(),
+    }))
+    .action(async ({parsedInput: {courseId, name, description, image, state}, ctx: {userId}}) => {
+        const course = await prisma.course.update({
+            where: {
+                id: courseId,
+                authorId: userId,
+            },
+            data: {
+                name,
+                description,
+                image,
+                state,
+            },
+        });
+        revalidatePath("/admin/courses");
+        redirect(`/admin/courses/${course.id}`);
+    });
+

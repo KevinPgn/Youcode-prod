@@ -49,4 +49,4 @@ export const CourseDetail = ({course}: {course: any}) => {
         </div>
       </div>
     )
-  }
+  } 
