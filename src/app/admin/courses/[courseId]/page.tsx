@@ -2,6 +2,7 @@ import { CourseDetail } from '@/components/admin/courses/courseId/CourseDetail'
 import { EnTeteAdminCourseId } from '@/components/admin/EnTeteAdminStats'
 import Auth from '@/lib/middleware'
 import React from 'react'
+import { getCourseById } from '@/app/admin/action.admin'
 
 interface CourseIdPageProps {
     params: {
@@ -10,11 +11,13 @@ interface CourseIdPageProps {
 }
 
 const CourseIdPage = async ({params}: CourseIdPageProps) => {
+  const course = await getCourseById({courseId: params.courseId})
+  
   return (
     <Auth>
         <section>
           <EnTeteAdminCourseId params={params}/>
-          <CourseDetail />
+          <CourseDetail course={course}/>
         </section>
     </Auth>
   )

@@ -1,4 +1,4 @@
-export const CourseDetail = () => {
+export const CourseDetail = ({course}: {course: any}) => {
   return <>
     
   </>

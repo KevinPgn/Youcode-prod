@@ -124,3 +124,17 @@ export const createCourse = authenticatedAction
         revalidatePath("/admin/courses");
         redirect("/admin/courses");
     });
+
+export const getCourseById = authenticatedAction
+    .schema(z.object({
+        courseId: z.string(),
+    }))
+    .action(async ({parsedInput: {courseId}, ctx: {userId}}) => {
+        const course = await prisma.course.findUnique({
+            where: {
+                id: courseId,
+                authorId: userId,
+            },
+        });
+        return course;
+    });
