@@ -88,3 +88,14 @@ export const getDashboardData = authenticatedAction
         ]);
         return { users, chapters, courses };
     });
+
+export const getCoursesCreated = authenticatedAction
+    .schema(z.object({}))
+    .action(async ({parsedInput: {}, ctx: {userId}}) => {
+        const courses = await prisma.course.findMany({
+            where: {
+                authorId: userId,
+            },
+        });
+        return courses;
+    });

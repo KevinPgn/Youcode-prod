@@ -1,6 +1,9 @@
 import { BtnNewCourse } from "./BtnNewCourse"
+import { getCoursesCreated } from "@/app/admin/action.admin"
 
-export const CoursesUser = () => {
+export const CoursesUser = async () => {
+  const courses = await getCoursesCreated({})
+  const coursesData = courses?.data
   return <div className="max-w-[800px] h-[600px] mx-auto">
         <div className='flex items-center justify-between mb-10'>
             <h1 className='text-white text-2xl border-b pb-2 border-gray-800 font-semibold'>Courses</h1>
@@ -12,24 +15,27 @@ export const CoursesUser = () => {
             <span>Course</span>
             <span>Actions</span>
           </div>
-          {/* This is a placeholder. You'll need to map over your actual courses data */}
-          {[1, 2, 3].map((course, index) => (
-            <div key={index} className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-gray-800 rounded-md overflow-hidden">
-                  {/* Replace with actual image */}
-                  <div className="w-full h-full flex items-center justify-center bg-gray-700 text-white text-2xl font-bold">
-                    {`Course Name ${index + 1}`.charAt(0)}
+          {coursesData && coursesData.length > 0 ? (
+            coursesData.map((course, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-gray-800 rounded-md overflow-hidden">
+                    {/* Replace with actual image */}
+                    <div className="w-full h-full flex items-center justify-center bg-gray-700 text-white text-2xl font-bold">
+                      {course.name.charAt(0)}
+                    </div>
                   </div>
+                  <span className="text-white">{course.name}</span>
                 </div>
-                <span className="text-white">Course Name {index + 1}</span>
+                <div className="space-x-2">
+                  <button className="text-blue-500 hover:text-blue-400">Edit</button>
+                  <button className="text-red-500 hover:text-red-400">Delete</button>
+                </div>
               </div>
-              <div className="space-x-2">
-                <button className="text-blue-500 hover:text-blue-400">Edit</button>
-                <button className="text-red-500 hover:text-red-400">Delete</button>
-              </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <h2 className="text-white text-center text-xl">No courses available try to create one</h2>
+          )}
         </div>
 
         </div>
