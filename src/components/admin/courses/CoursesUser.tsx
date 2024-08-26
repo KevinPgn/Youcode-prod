@@ -1,5 +1,6 @@
 import { BtnNewCourse } from "./BtnNewCourse"
 import { getCoursesCreated } from "@/app/admin/action.admin"
+import Link from "next/link"
 
 export const CoursesUser = async () => {
   const courses = await getCoursesCreated({})
@@ -25,7 +26,9 @@ export const CoursesUser = async () => {
                       {course.name.charAt(0)}
                     </div>
                   </div>
-                  <span className="text-white">{course.name}</span>
+                  <Link href={`/admin/courses/${course.id}`}>
+                    <span className="text-white">{course.name}</span>
+                  </Link>
                 </div>
                 <div className="space-x-2">
                   <button className="text-blue-500 hover:text-blue-400">Edit</button>
