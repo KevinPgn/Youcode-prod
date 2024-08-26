@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache"
 export const getCoursesPublished = async () => {
     const courses = await prisma.course.findMany({
         where: {
-            published: true
+            state: "published"
         },
         select: {
             id: true,
