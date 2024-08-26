@@ -35,22 +35,22 @@ export const FormCreateCourse = () => {
             name="presentation"
             placeholder="## Some title"
             rows={3}
-            className="w-full bg-gray-800 text-white rounded px-3 py-2"
+            className="bg-transparent border-gray-700 focus:ring-red-500"
           ></Textarea>
         </div>
         <div className="mb-6">
           <label htmlFor="state" className="block text-sm font-medium text-gray-300 mb-1">State</label>
           <Select>
-            <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="state" />
+            <SelectTrigger className="w-full bg-transparent border-gray-700">
+                <SelectValue placeholder="Select a state" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-gray-900 text-white border-gray-700">
                 <SelectItem value="draft">Draft</SelectItem>
                 <SelectItem value="published">Published</SelectItem>
             </SelectContent>
           </Select>
         </div>
-        <button type="submit" className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-colors">
+        <button type="submit" className="w-full text-sm bg-[#E11D48] text-white py-2 rounded hover:bg-[#E11D48]/80 transition-colors">
           Submit
         </button>
       </form>

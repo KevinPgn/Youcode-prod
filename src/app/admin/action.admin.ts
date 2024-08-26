@@ -9,8 +9,8 @@ model Course {
   name String
   description String
   image String?
-  published Boolean @default(false)
-
+  state String @default("draft")
+  
   authorId String
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
