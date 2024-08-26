@@ -135,6 +135,14 @@ export const getCourseById = authenticatedAction
                 id: courseId,
                 authorId: userId,
             },
+            include: {
+                _count: {
+                    select: {
+                        chapters: true,
+                        enrollments: true,
+                    },
+                },
+            },
         });
         return course;
     });
