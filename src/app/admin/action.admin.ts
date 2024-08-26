@@ -184,6 +184,28 @@ export const getChaptersOfTheCourse = authenticatedAction
                     authorId: userId,
                 },
             },
+            select: {
+                id: true,
+                title: true,
+            },
         });
         return chapters;
+    });
+
+// get only the name of the course
+export const getCourseName = authenticatedAction
+    .schema(z.object({
+        courseId: z.string(),
+    }))
+    .action(async ({parsedInput: {courseId}, ctx: {userId}}) => {
+        const course = await prisma.course.findUnique({
+            where: {
+                id: courseId,
+                authorId: userId,
+            },
+            select: {
+                name: true,
+            },
+        });
+        return course
     });
