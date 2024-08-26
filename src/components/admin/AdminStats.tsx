@@ -1,7 +1,6 @@
 import React from 'react';
 import { BtnCourses } from './BtnCourses';
 import { getDashboardData } from '@/app/admin/action.admin';
-// TODO: Get stats from database
 
 export const AdminStats = async () => {
   const data = await getDashboardData({});
