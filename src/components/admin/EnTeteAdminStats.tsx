@@ -24,7 +24,7 @@ export const EnTeteAdminStats = () => {
 export const EnTeteAdminCourses = () => {
     const router = useRouter()
     
-    return <div className="border-b border-gray-800 py-3 mb-10">
+    return <div className="border-b border-gray-800 py-3 mb-5">
         <div className="max-w-[800px] flex items-center gap-5 mx-auto">
         <Breadcrumb>
   <BreadcrumbList className="text-xs text-white">
@@ -47,7 +47,7 @@ export const EnTeteAdminCourses = () => {
 
 export const EnTeteAdminNewCourse = () => {
     const router = useRouter()
-    return <div className="border-b border-gray-800 py-3 mb-10">
+    return <div className="border-b border-gray-800 py-3 mb-5">
         <div className="max-w-[800px] flex items-center gap-5 mx-auto">
         <Breadcrumb>
   <BreadcrumbList className="text-xs text-white">
