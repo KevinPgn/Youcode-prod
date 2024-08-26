@@ -227,3 +227,28 @@ export const createChapter = authenticatedAction
         revalidatePath(`/admin/courses/${courseId}`);
         redirect(`/admin/courses/${courseId}/chapters/${newChapter.id}`);
     });
+
+export const updateChapter = authenticatedAction
+    .schema(z.object({
+        chapterId: z.string(),
+        title: z.string().min(3).max(100).optional(),
+        content: z.string().min(10).max(500).optional(),
+        videoUrl: z.string().optional(),
+    }))
+    .action(async ({parsedInput: {chapterId, title, content, videoUrl}, ctx: {userId}}) => {
+        const chapter = await prisma.chapter.update({
+            where: {
+                id: chapterId,
+                course: {
+                    authorId: userId,
+                },
+            },
+            data: {
+                title,
+                content,
+                videoUrl,
+            },
+        });
+
+        return chapter;
+    });
