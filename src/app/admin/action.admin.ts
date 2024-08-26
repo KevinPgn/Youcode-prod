@@ -3,6 +3,7 @@ import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { authenticatedAction } from "@/lib/safe-actions";
+import { redirect } from "next/navigation";
 /*
 model Course {
   id String @id @default(cuid())
@@ -96,6 +97,30 @@ export const getCoursesCreated = authenticatedAction
             where: {
                 authorId: userId,
             },
+            orderBy: {
+                createdAt: "desc",
+            },
         });
         return courses;
+    });
+
+export const createCourse = authenticatedAction
+    .schema(z.object({
+        name: z.string().min(3).max(100),
+        description: z.string().min(10).max(500),
+        image: z.string().optional(),
+        state: z.enum(["draft", "published"]),
+    }))
+    .action(async ({parsedInput: {name, description, image, state}, ctx: {userId}}) => {
+        await prisma.course.create({
+            data: {
+                name,
+                description,
+                image,
+                state,
+                authorId: userId,
+            },
+        });
+        revalidatePath("/admin/courses");
+        redirect("/admin/courses");
     });
