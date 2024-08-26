@@ -1,3 +1,4 @@
+import { CoursesUser } from '@/components/admin/courses/CoursesUser'
 import { EnTeteAdminCourses } from '@/components/admin/EnTeteAdminStats'
 import Auth from '@/lib/middleware'
 import React from 'react'
@@ -7,6 +8,7 @@ const CoursesPage = () => {
     <Auth>
         <section>
             <EnTeteAdminCourses />
+            <CoursesUser />
         </section>
     </Auth>
   )
