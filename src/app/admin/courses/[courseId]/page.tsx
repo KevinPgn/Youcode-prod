@@ -1,3 +1,4 @@
+import { CourseDetail } from '@/components/admin/courses/courseId/CourseDetail'
 import { EnTeteAdminCourseId } from '@/components/admin/EnTeteAdminStats'
 import Auth from '@/lib/middleware'
 import React from 'react'
@@ -11,7 +12,10 @@ interface CourseIdPageProps {
 const CourseIdPage = async ({params}: CourseIdPageProps) => {
   return (
     <Auth>
-        <EnTeteAdminCourseId params={params}/>
+        <section>
+          <EnTeteAdminCourseId params={params}/>
+          <CourseDetail />
+        </section>
     </Auth>
   )
 }
