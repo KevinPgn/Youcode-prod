@@ -101,7 +101,7 @@ export const getCoursesCreated = authenticatedAction
                 createdAt: "desc",
             },
         });
-        return courses;
+        return courses
     });
 
 export const createCourse = authenticatedAction
@@ -112,7 +112,7 @@ export const createCourse = authenticatedAction
         state: z.enum(["draft", "published"]),
     }))
     .action(async ({parsedInput: {name, description, image, state}, ctx: {userId}}) => {
-        await prisma.course.create({
+       const newCourse = await prisma.course.create({
             data: {
                 name,
                 description,
@@ -122,7 +122,7 @@ export const createCourse = authenticatedAction
             },
         });
         revalidatePath("/admin/courses");
-        redirect("/admin/courses");
+        redirect(`/admin/courses/${newCourse.id}`);
     });
 
 export const getCourseById = authenticatedAction
