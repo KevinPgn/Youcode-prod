@@ -87,6 +87,7 @@ model Chapter {
   title String
   content String
   videoUrl String?
+  state String @default("draft")
 
   userProgress UserChapterProgress[]
 
