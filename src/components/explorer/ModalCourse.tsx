@@ -50,7 +50,7 @@ export const ModalCourse = ({setModalOpen, course, userId}: {setModalOpen: (open
                 {course.chapters.map((chapter: any) => (
                     <div key={chapter.id} className='flex items-center border border-[#453f3c] cursor-pointer hover:bg-[#131110] duration-75 p-2 gap-3 px-5 rounded-md'>
                         <CircleDashed className='w-5 h-5 text-gray-400' />
-                        <p className='text-sm font-normal text-gray-400'>{chapter.title}</p>
+                        <p className='text-md font-normal text-gray-400'>{chapter.title}</p>
                     </div>
                 ))}
             </div>
