@@ -9,8 +9,6 @@ export const ContenuChapter = ({chapter}: {chapter: any}) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const formData = new FormData(e.target as HTMLFormElement)
-    const content = formData.get('content') as string
     try {
       const res = await updateChapter({chapterId: chapter.id, content})
       return res

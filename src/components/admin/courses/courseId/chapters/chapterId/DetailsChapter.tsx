@@ -31,7 +31,9 @@ export const DetailsChapter = ({chapter}: {chapter: any}) => {
     {/* State */}
     <div className="flex flex-col gap-2 mt-5">
         <p className="text-sm font-normal text-white">State</p>
-        <select name="state" id="state" className="text-md text-white border rounded-md p-2 cursor-pointer font-normal bg-transparent border-gray-700">
+        <select name="state" id="state"
+        defaultValue={chapter.state}
+        className="text-md text-white border rounded-md p-2 cursor-pointer font-normal bg-transparent border-gray-700">
             <option value="hidden" className="text-black cursor-pointer">HIDDEN</option>
             <option value="published" className="text-black cursor-pointer">PUBLISHED</option>
         </select>
