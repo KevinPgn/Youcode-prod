@@ -12,6 +12,7 @@ export const getCoursesPublished = async () => {
             id: true,
             image: true,
             name: true,
+            description: true,
             author: {
                 select: {
                     name: true,

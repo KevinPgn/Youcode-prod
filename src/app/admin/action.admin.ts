@@ -84,8 +84,18 @@ export const getDashboardData = authenticatedAction
                     },
                 },
             }),
-            prisma.chapter.count(),
-            prisma.course.count(),
+            prisma.chapter.count({
+                where: {
+                    course: {
+                        authorId: userId,
+                    },
+                },
+            }),
+            prisma.course.count({
+                where: {
+                    authorId: userId,
+                },
+            }),
         ]);
         return { users, chapters, courses };
     });
