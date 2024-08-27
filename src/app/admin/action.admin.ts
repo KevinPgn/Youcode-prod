@@ -189,9 +189,6 @@ export const getChaptersOfTheCourse = authenticatedAction
                 title: true,
                 state: true,
             },
-            orderBy: {
-                createdAt: "desc",
-            },
         });
         return chapters;
     });
@@ -253,6 +250,23 @@ export const updateChapter = authenticatedAction
                 title,
                 content,
                 videoUrl,
+            },
+        });
+
+        return chapter;
+    });
+
+export const getChapterById = authenticatedAction
+    .schema(z.object({
+        chapterId: z.string(),
+    }))
+    .action(async ({parsedInput: {chapterId}, ctx: {userId}}) => {
+        const chapter = await prisma.chapter.findUnique({
+            where: {
+                id: chapterId,
+                course: {
+                    authorId: userId,
+                },
             },
         });
 
