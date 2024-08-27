@@ -237,8 +237,9 @@ export const updateChapter = authenticatedAction
         title: z.string().min(3).max(100).optional(),
         content: z.string().min(10).max(500).optional(),
         videoUrl: z.string().optional(),
+        state: z.enum(["hidden", "published"]).optional(),
     }))
-    .action(async ({parsedInput: {chapterId, title, content, videoUrl}, ctx: {userId}}) => {
+    .action(async ({parsedInput: {chapterId, title, content, videoUrl, state}, ctx: {userId}}) => {
         const chapter = await prisma.chapter.update({
             where: {
                 id: chapterId,
@@ -250,6 +251,7 @@ export const updateChapter = authenticatedAction
                 title,
                 content,
                 videoUrl,
+                state,
             },
         });
 
