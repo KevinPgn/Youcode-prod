@@ -95,6 +95,12 @@ export const getCoursesPublished = async () => {
                     id: true,
                     title: true
                 }
+            },
+            enrollments: {
+                select: {
+                    id: true,
+                    userId: true
+                }
             }
         }
     })

@@ -6,8 +6,7 @@ export const ShowCoursesPublished = ({courses, userId}: {courses: CourseExploreP
   const course = courses.courses
   const [modalOpen, setModalOpen] = useState(false)
   const [courseSelected, setCourseSelected] = useState<any>(null)
-
-  console.log(course.map((course: any) => course.chapters))
+  
   return <>
     {course.length === 0 ? (
         <div className="flex justify-center items-center h-full">

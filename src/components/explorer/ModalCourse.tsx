@@ -1,8 +1,14 @@
+"use client"
 import React from 'react';
 import { Button } from '../ui/button';
 import { CircleDashed } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { joinCourse } from '../course/action.course';
 
 export const ModalCourse = ({setModalOpen, course, userId}: {setModalOpen: (open: boolean) => void, course: any, userId: string}) => {  
+    const router = useRouter();
+    const isEnrolled = course.enrollments.some((enrollment: any) => enrollment.userId === userId);
+    console.log(isEnrolled)
     return (
     <div onClick={() => setModalOpen(false)} className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div
@@ -31,16 +37,12 @@ export const ModalCourse = ({setModalOpen, course, userId}: {setModalOpen: (open
             <div className="mt-5">
                 {userId === course.author.id ? (
                     <p className="text-sm text-yellow-500">You are the author of this course.</p>
+                ) : null}
+
+                {isEnrolled ? (
+                    <span className='text-sm text-green-500'>You are enrolled in this course.</span>
                 ) : (
-                    <Button
-                        onClick={() => {
-                            // Logic to join the course
-                            console.log("Joining course:", course.id);
-                        }}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                    >
-                        Join Course
-                    </Button>
+                    <Button className='w-full bg-blue-600 hover:bg-blue-700 text-white' onClick={() => joinCourse({courseId: course.id})}>Join Course</Button>
                 )}
             </div>
         </div>
@@ -48,7 +50,7 @@ export const ModalCourse = ({setModalOpen, course, userId}: {setModalOpen: (open
             <h1 className='text-lg font-bold text-white'>Chapters</h1>
             <div className='flex flex-col gap-3 mt-5'>
                 {course.chapters.map((chapter: any) => (
-                    <div key={chapter.id} className='flex items-center border border-[#453f3c] cursor-pointer hover:bg-[#131110] duration-75 p-2 gap-3 px-5 rounded-md'>
+                    <div key={chapter.id} onClick={() => router.push(`/course/${course.id}/chapter/${chapter.id}`)} className='flex items-center border border-[#453f3c] cursor-pointer hover:bg-[#131110] duration-75 p-2 gap-3 px-5 rounded-md'>
                         <CircleDashed className='w-5 h-5 text-gray-400' />
                         <p className='text-md font-normal text-gray-400'>{chapter.title}</p>
                     </div>
