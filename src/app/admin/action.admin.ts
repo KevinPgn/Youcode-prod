@@ -187,6 +187,10 @@ export const getChaptersOfTheCourse = authenticatedAction
             select: {
                 id: true,
                 title: true,
+                state: true,
+            },
+            orderBy: {
+                createdAt: "desc",
             },
         });
         return chapters;
@@ -215,13 +219,15 @@ export const createChapter = authenticatedAction
         courseId: z.string(),
         title: z.string().min(3).max(100).optional(),
         content: z.string().min(10).max(500).optional(),
+        state: z.enum(["hidden", "published"]).optional(),
     }))
-    .action(async ({parsedInput: {courseId, title, content}, ctx: {userId}}) => {
+    .action(async ({parsedInput: {courseId, title, content, state}, ctx: {userId}}) => {
         const newChapter = await prisma.chapter.create({
             data: {
                 title: title || "Draft Lesson",
                 content: content || "Default Content",
                 courseId,
+                state: state || "hidden",
             },
         });
         revalidatePath(`/admin/courses/${courseId}`);
