@@ -13,7 +13,7 @@ const ChapterIdPage = async ({params}: {params: {courseId: string, chapterId: st
         <section>
             <EnTeteAdminCourseIdChaptersChapterId params={{courseId: params.courseId, chapterId: params.chapterId}} />
 
-            <div className='max-w-[1000px] h-[600px] mx-auto mt-7'>
+            <div className='max-w-[1000px] mx-auto mt-7'>
                 <h2 className="text-3xl font-semibold border-b text-white border-gray-800 py-2 mb-5 w-fit">Draft Chapter</h2>
 
                 <div className='flex gap-5 mb-10'>
