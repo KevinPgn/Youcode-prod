@@ -2,7 +2,7 @@
 import { CourseExploreProps } from "@/lib/types"
 import { useState } from "react"
 import { ModalCourse } from "./ModalCourse"
-export const ShowCoursesPublished = ({courses}: {courses: CourseExploreProps}) => {
+export const ShowCoursesPublished = ({courses, userId}: {courses: CourseExploreProps, userId: string}) => {
   const course = courses.courses
   const [modalOpen, setModalOpen] = useState(false)
   const [courseSelected, setCourseSelected] = useState<any>(null)
@@ -42,6 +42,7 @@ export const ShowCoursesPublished = ({courses}: {courses: CourseExploreProps}) =
       </div>
     )}
     {modalOpen && <ModalCourse 
+    userId={userId}
     course={courseSelected}
     setModalOpen={setModalOpen}/>}
   </>

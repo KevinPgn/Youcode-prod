@@ -15,6 +15,7 @@ export const getCoursesPublished = async () => {
             description: true,
             author: {
                 select: {
+                    id: true,
                     name: true,
                     image: true
                 }

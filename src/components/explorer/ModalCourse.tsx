@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../ui/button';
 import { CircleDashed } from 'lucide-react';
 
-export const ModalCourse = ({setModalOpen, course}: {setModalOpen: (open: boolean) => void, course: any}) => {  
+export const ModalCourse = ({setModalOpen, course, userId}: {setModalOpen: (open: boolean) => void, course: any, userId: string}) => {  
     return (
     <div onClick={() => setModalOpen(false)} className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div
@@ -28,7 +28,21 @@ export const ModalCourse = ({setModalOpen, course}: {setModalOpen: (open: boolea
             <div className='mt-5 text-sm text-gray-400'
             dangerouslySetInnerHTML={{ __html: course.description.slice(0, 100) + "..."}}
             ></div>
-            <Button className='w-fit bg-red-500 hover:bg-red-600 mt-5'>Join</Button>
+            <div className="mt-5">
+                {userId === course.author.id ? (
+                    <p className="text-sm text-yellow-500">You are the author of this course.</p>
+                ) : (
+                    <Button
+                        onClick={() => {
+                            // Logic to join the course
+                            console.log("Joining course:", course.id);
+                        }}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    >
+                        Join Course
+                    </Button>
+                )}
+            </div>
         </div>
         <div className='w-[35%] h-fit bg-[#292524] p-5 rounded-lg border border-[#221f1e]'>
             <h1 className='text-lg font-bold text-white'>Chapters</h1>
