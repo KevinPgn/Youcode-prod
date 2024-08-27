@@ -17,6 +17,15 @@ export const getCoursesPublished = async () => {
                     name: true,
                     image: true
                 }
+            },
+            chapters: {
+                where: {
+                    state: "published"
+                },
+                select: {
+                    id: true,
+                    title: true
+                }
             }
         }
     })
