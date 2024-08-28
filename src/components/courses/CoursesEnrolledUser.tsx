@@ -12,11 +12,11 @@ export const CoursesEnrolledUser = ({courses, userId}: {courses: any, userId: st
   return <>
     {courses.length === 0 ? (
         <div className="flex justify-center items-center h-full">
-            <h1 className="text-2xl font-bold">No courses published yet.</h1>
+            <h1 className="text-2xl font-bold">No courses enrolled yet.</h1>
         </div>
     ): (
       <div className="max-w-[1000px] h-[600px] mx-auto mt-5">
-        <h2 className="text-3xl font-bold border-b border-gray-800 text-white py-3 mb-5 w-fit">Explorer</h2>
+        <h2 className="text-3xl font-bold border-b border-gray-800 text-white py-3 mb-5 w-fit">Courses Enrolled</h2>
         <div className="flex flex-wrap gap-5">
           {courses.map((course:any) => (
             <div
