@@ -33,3 +33,19 @@ export const joinCourse = authenticatedAction
         })
         revalidatePath(`/explorer`)
     })
+
+export const getEnrollment = authenticatedAction
+    .schema(z.object({
+        courseId: z.string()
+    }))
+    .action(async ({parsedInput: {courseId}, ctx:{userId}}) => {
+        const enrollment = await prisma.enrollment.findUnique({
+            where: {
+                userId_courseId: {
+                    userId,
+                    courseId
+                }
+            }
+        })
+        return enrollment
+    })

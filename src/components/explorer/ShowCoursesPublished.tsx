@@ -2,10 +2,13 @@
 import { CourseExploreProps } from "@/lib/types"
 import { useState } from "react"
 import { ModalCourse } from "./ModalCourse"
+import { getEnrollment } from "../course/action.course"
+
 export const ShowCoursesPublished = ({courses, userId}: {courses: CourseExploreProps, userId: string}) => {
   const course = courses.courses
   const [modalOpen, setModalOpen] = useState(false)
   const [courseSelected, setCourseSelected] = useState<any>(null)
+  const [enrollment, setEnrollment] = useState<any>(null)
   
   return <>
     {course.length === 0 ? (
@@ -18,9 +21,11 @@ export const ShowCoursesPublished = ({courses, userId}: {courses: CourseExploreP
         <div className="flex flex-wrap gap-5">
           {course.map((course) => (
             <div
-            onClick={() => {
+            onClick={async () => {
               setCourseSelected(course)
               setModalOpen(!modalOpen)
+              const enrollment = await getEnrollment({courseId: course.id})
+              setEnrollment(enrollment)
             }}
             key={course.id} className="flex items-center p-5 gap-3 w-fit cursor-pointer hover:bg-[#292524] bg-[#1C1917] rounded-md">
               {course.image ? (
@@ -43,6 +48,7 @@ export const ShowCoursesPublished = ({courses, userId}: {courses: CourseExploreP
     {modalOpen && <ModalCourse 
     userId={userId}
     course={courseSelected}
+    enrollment={enrollment?.data}
     setModalOpen={setModalOpen}/>}
   </>
 }

@@ -5,10 +5,8 @@ import { CircleDashed } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { joinCourse } from '../course/action.course';
 
-export const ModalCourse = ({setModalOpen, course, userId}: {setModalOpen: (open: boolean) => void, course: any, userId: string}) => {  
+export const ModalCourse = ({setModalOpen, course, userId, enrollment}: {setModalOpen: (open: boolean) => void, course: any, userId: string, enrollment: any}) => {  
     const router = useRouter();
-    const isEnrolled = course.enrollments.some((enrollment: any) => enrollment.userId === userId);
-    console.log(isEnrolled)
     return (
     <div onClick={() => setModalOpen(false)} className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div
@@ -38,7 +36,7 @@ export const ModalCourse = ({setModalOpen, course, userId}: {setModalOpen: (open
                 {userId === course.author.id ? (
                     <p className="text-sm text-yellow-500">You are the author of this course.</p>
                 ) : (
-                    isEnrolled ? (
+                    enrollment ? (
                         <span className='text-sm text-green-500'>You are enrolled in this course.</span>
                     ) : (
                         <Button className='w-full bg-blue-600 hover:bg-blue-700 text-white' onClick={() => joinCourse({courseId: course.id})}>Join Course</Button>
