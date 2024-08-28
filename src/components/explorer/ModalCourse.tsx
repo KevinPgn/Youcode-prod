@@ -37,12 +37,12 @@ export const ModalCourse = ({setModalOpen, course, userId}: {setModalOpen: (open
             <div className="mt-5">
                 {userId === course.author.id ? (
                     <p className="text-sm text-yellow-500">You are the author of this course.</p>
-                ) : null}
-
-                {isEnrolled ? (
-                    <span className='text-sm text-green-500'>You are enrolled in this course.</span>
                 ) : (
-                    <Button className='w-full bg-blue-600 hover:bg-blue-700 text-white' onClick={() => joinCourse({courseId: course.id})}>Join Course</Button>
+                    isEnrolled ? (
+                        <span className='text-sm text-green-500'>You are enrolled in this course.</span>
+                    ) : (
+                        <Button className='w-full bg-blue-600 hover:bg-blue-700 text-white' onClick={() => joinCourse({courseId: course.id})}>Join Course</Button>
+                    )
                 )}
             </div>
         </div>
