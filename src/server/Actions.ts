@@ -2,6 +2,7 @@
 import prisma from "@/lib/prisma"
 import {z} from "zod"
 import { authenticatedAction } from "@/lib/safe-actions"
+import { revalidatePath } from "next/cache"
 /*
 model Course {
   id String @id @default(cuid())
@@ -55,7 +56,20 @@ export const markChapterAsCompleted = authenticatedAction
         chapterId: z.string()
     }))
     .action(async ({parsedInput, ctx: {userId}}) => {
-        await prisma.userChapterProgress.upsert({
+        
+        const chapter = await prisma.chapter.findUnique({
+            where: {id: parsedInput.chapterId}
+        })
+        if(!chapter) {
+            return {error: "Chapter not found"}
+        }
+        const course = await prisma.course.findUnique({
+            where: {id: chapter.courseId}
+        })  
+        if(!course) {
+            return {error: "Course not found"}
+        }
+      await prisma.userChapterProgress.upsert({
             where: {
               authorId_chapterId: {
                 authorId: userId,
@@ -71,4 +85,6 @@ export const markChapterAsCompleted = authenticatedAction
               completed: true,
             },
           });
+
+          revalidatePath(`/course/${course.id}/chapter/${chapter.id}`)
     })

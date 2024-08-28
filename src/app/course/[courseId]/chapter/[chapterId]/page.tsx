@@ -11,6 +11,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string, chapterId
       courseId: courseId
     },
     select: {
+      id: true,
       content: true,
     }
   })
