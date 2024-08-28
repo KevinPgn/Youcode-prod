@@ -49,3 +49,42 @@ export const getEnrollment = authenticatedAction
         })
         return enrollment
     })
+
+// get all courses enrolled by user
+export const getEnrolledCourses = authenticatedAction
+    .schema(z.object({}))
+    .action(async ({ctx:{userId}}) => {
+        const courses = await prisma.course.findMany({
+            where: {
+                enrollments: {
+                    some: {
+                        userId: userId
+                    }
+                }
+    
+            },
+            select: {
+                id: true,
+                image: true,
+                name: true,
+                description: true,
+                author: {
+                    select: {
+                        id: true,
+                        name: true,
+                        image: true
+                    }
+                },
+                chapters: {
+                    where: {
+                        state: "published"
+                    },
+                    select: {
+                        id: true,
+                        title: true
+                    }
+                },
+            }
+        })
+        return courses
+    })
